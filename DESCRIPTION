@@ -1,0 +1,13 @@
+Package: schedules
+Title: Rotating and Weekly Scheduling Calendars
+Version: 0.0.0.9000
+Authors@R: person('Jesse', 'Smith', email = 'jesse.smith@shelbycountytn.gov', role = c('cre', 'aut'))
+Description: The schedules package creates print-ready calendars of work schedules.
+License: MIT + file LICENSE
+Imports: 
+    config,
+    golem,
+    shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

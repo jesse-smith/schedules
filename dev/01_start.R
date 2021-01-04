@@ -32,8 +32,12 @@ usethis::use_mit_license("Jesse Smith")  # You can set another license here
 usethis::use_readme_md(open = FALSE)
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge("experimental")
+
 ## Use git ----
 usethis::use_git()
+
+## Use github ----
+usethis::use_github()
 
 ## Init Testing Infrastructure ----
 ## Create a template for tests

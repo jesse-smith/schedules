@@ -1,15 +1,38 @@
 Package: schedules
 Title: Rotating and Weekly Scheduling Calendars
 Version: 0.0.0.9000
-Authors@R: person('Jesse', 'Smith', email = 'jesse.smith@shelbycountytn.gov', role = c('cre', 'aut'))
-Description: The schedules package creates print-ready calendars of work schedules.
+Authors@R: 
+    person(given = "Jesse",
+           family = "Smith",
+           role = c("cre", "aut"),
+           email = "jesse.smith@shelbycountytn.gov")
+Description: The schedules package creates print-ready calendars
+    of work schedules.
 License: MIT + file LICENSE
-Imports: 
-    config,
-    golem,
-    shiny
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.1.1
 URL: https://github.com/jesse-smith/schedules
 BugReports: https://github.com/jesse-smith/schedules/issues
+Imports: 
+    attempt,
+    calendR,
+    config,
+    dplyr,
+    DT,
+    glue,
+    golem,
+    htmltools,
+    janitor,
+    lubridate,
+    magrittr,
+    processx,
+    rlang,
+    shiny,
+    shinyWidgets,
+    stringr,
+    vctrs,
+    shinythemes
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1

@@ -19,7 +19,8 @@ create_calendar <- function(
   start = "2021-01-01",
   end = "2021-12-31",
   anchor = start,
-  cycle = NULL
+  cycle = NULL,
+  save_as = NULL
 ) {
 
   # Create schedule
@@ -56,6 +57,8 @@ create_calendar <- function(
     col      = "#2C3E50",
     special.col = "#2C3E5040",
     papersize = "A5",
-    lwd = 1/2
+    lwd = 1/2,
+    pdf = !is.null(save_as),
+    doc_name = if (is.null(save_as)) "" else save_as
   )
 }

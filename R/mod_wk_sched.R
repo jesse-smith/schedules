@@ -33,7 +33,9 @@ mod_wk_sched_input <- function(id) {
     weekday_switch(id, "wed", value = TRUE),
     weekday_switch(id, "thu", value = TRUE),
     weekday_switch(id, "fri", value = TRUE),
-    weekday_switch(id, "sat")
+    weekday_switch(id, "sat"),
+    shiny::br(),
+    download_button(id)
   )
 }
 

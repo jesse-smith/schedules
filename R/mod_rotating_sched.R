@@ -10,12 +10,12 @@ mod_rotating_sched_input <- function(id) {
     "This schedule repeats on a user-defined basis.",
     "To create a calendar, enter one or more 'on-off' periods",
     "that an individual on this schedule will work,",
-    "plus an 'anchor' date to use as a start date for calculations."
+    "plus an 'anchor' date to use as a start date for calculations.",
     "The periods should be separated by dashes and",
     "start with the 'on' phase (i.e. 4-2-5-3 means",
     "4 days on, 2 days off, 5 days on, 3 days off, repeat)."
   )
-  
+
   shiny::sidebarPanel(
     shiny::titlePanel("Rotating Schedule"),
     shiny::helpText(help_text),
@@ -39,7 +39,7 @@ mod_rotating_sched_output <- function(id) {
 
 mod_rotating_sched_server <- function(id) {
   shiny::moduleServer(
-    id, 
+    id,
     mod_rotating_sched_server_function
   )
 }
@@ -49,7 +49,7 @@ mod_rotating_sched_server_function <- function(input, output, session) {
   cycle <- shiny::reactive(
     rotations_to_cycle(input$rotations)
   )
-  
+
   # Create calendar viz
   calendar <- shiny::reactive(
     create_calendar(
@@ -63,10 +63,10 @@ mod_rotating_sched_server_function <- function(input, output, session) {
   ) %>%
     # Prevent premature invalidation
     shiny::debounce(1e3L)
-    
-  
-    
-  
+
+
+
+
   # Assign viz to output
   output$calendar <- shiny::renderPlot(calendar())
 }

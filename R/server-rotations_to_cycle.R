@@ -1,4 +1,4 @@
-rotations_to_cycle(rotations) {
+rotations_to_cycle <- function(rotations) {
   rotations %>%
     std_rotations() %>%
     split_rotations() %>%
@@ -8,40 +8,40 @@ rotations_to_cycle(rotations) {
 }
 
 expand_rotations <- function(rtns) {
-  
+
   n <- vctrs::vec_size(rtns)
-  
+
   on <- vctrs::vec_rep(c(TRUE, FALSE), n)
-  
+
   scheduled_list <- list()
-  
+
   for (i in seq_len(n)) {
     scheduled_list[[i]] <- vctrs::vec_rep(on[[i]], rtns[[i]])
   }
-  
+
   unlist(scheduled_list)
 }
 
 validate_rotations <- function(rtns) {
   n <- vctrs::vec_size(rtns)
-  
+
   nonzero <- n != 0L
-  
+
   even <- n %% 2L == 0L
-  
+
   error_msg <- paste(
    "`Rotations` must be an alternating sequence of numerals",
    "and dashes (i.e. 4-2-6-3) and must have an even number",
    "of numerals (i.e. 4-2-6 is not valid)."
   )
-  
+
   shiny::validate(
     shiny::need(
       nonzero && even,
       message = error_msg
     )
   )
-  
+
   rtns
 }
 

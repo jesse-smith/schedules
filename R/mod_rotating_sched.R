@@ -22,7 +22,9 @@ mod_rotating_sched_input <- function(id) {
     calendar_title(id),
     date_range(id),
     anchor_date(id),
-    rotations(id)
+    rotations(id),
+    shiny::br(),
+    download_button(id)
   )
 }
 
@@ -61,6 +63,8 @@ mod_rotating_sched_server_function <- function(input, output, session) {
   ) %>%
     # Prevent premature invalidation
     shiny::debounce(1e3L)
+    
+  
     
   
   # Assign viz to output

@@ -12,6 +12,7 @@
 #' 
 #' @param day A day of the week, as a 3-letter abbreviation in title case
 weekday_switch <- function(
+  id,
   day = c("sun", "mon", "tue", "wed", "thu", "fri", "sat"),
   value = FALSE
 ) {

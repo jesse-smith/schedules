@@ -73,7 +73,7 @@ mod_weekly_server_function <- function(input, output, session) {
     create_calendar(
       title = input$calendar_title,
       schedule = "custom",
-      cycle = weekly_cycle(),
+      cycle = cycle(),
       start = input$date_range[[1L]],
       end = input$date_range[[2L]]
     )

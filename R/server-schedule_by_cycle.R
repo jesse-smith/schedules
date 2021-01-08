@@ -16,12 +16,12 @@ schedule_by_cycle <- function(
 
   if (end < start) {
     start_switched <- end
-    to_switched    <- start
+    end_switched   <- start
 
     start <- start_switched
-    end   <- to_switched
+    end   <- end_switched
 
-    remove(start_switched, to_switched)
+    remove(start_switched, end_switched)
   } else if (start == end) {
     rlang::abort("`start` must not equal `end`")
   }
@@ -33,32 +33,32 @@ schedule_by_cycle <- function(
     ceiling() %>%
     as.integer()
 
-  times_to <- abs(anchor - end) %>%
+  times_end <- abs(anchor - end) %>%
     divide_by(cycle_length) %>%
     ceiling() %>%
     as.integer()
 
-  start_2_anchor <- rep(cycle, times_start)
-  anchor_2_to <- rep(cycle, times_to)
+  start_to_anchor <- rep(cycle, times_start)
+  anchor_to_end <- rep(cycle, times_end)
 
   if (anchor <= start) {
     # `anchor` is also less than `end`
     start_temp <- anchor
-    to_temp <- anchor + (cycle_length * times_to - 1L)
-    scheduled <- anchor_2_to
+    end_temp <- anchor + (cycle_length * times_end - 1L)
+    scheduled <- anchor_to_end
   } else if (anchor >= end) {
     # `anchor` is also greater than `start`
     start_temp <- anchor - (cycle_length * times_start - 1L)
-    to_temp <- anchor
-    scheduled <- start_2_anchor
+    end_temp <- anchor
+    scheduled <- start_to_anchor
   } else {
-    start_temp <- anchor - (cycle_length * times_start - 1L)
-    to_temp    <- anchor + (cycle_length * times_to - 1L)
-    scheduled  <- c(start_2_anchor, anchor_2_to[2:vctrs::vec_size(anchor_2_to)])
+    start_temp <- anchor - (cycle_length * times_start)
+    end_temp    <- anchor + (cycle_length * times_end - 1L)
+    scheduled  <- c(start_to_anchor, anchor_to_end)
   }
 
   dplyr::tibble(
-    date = seq(start_temp, to_temp, by = 1L),
+    date = seq(start_temp, end_temp, by = 1L),
     day = weekdays(date),
     scheduled = scheduled
   ) %>%

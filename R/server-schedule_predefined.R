@@ -36,9 +36,9 @@
 #' @param schedule A string indicating the schedule to use. For custom
 #'   schedules, use `schedule = "custom"`.
 #'
-#' @family Case Assignment
-#'
 #' @aliases schedule_weekdays schedule_42 schedule_5623
+#'
+#' @export
 schedule_predefined <- function(
   schedule = c("weekdays", "42", "5623", "custom"),
   start = Sys.Date(),

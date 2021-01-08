@@ -1,0 +1,10 @@
+name: schedules
+title:
+username:
+account: jesse-shiny
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3455205
+bundleId: 4073759
+url: https://jesse-shiny.shinyapps.io/schedules/
+when: 1610138365.0047

@@ -34,9 +34,3 @@ worksheet into a standard format for matching with REDcap. It:
   \item Inverts converted `NA`s (back to `NA_character_`)
 }
 }
-\seealso{
-Other Case Assignment: 
-\code{\link{schedule_predefined}()},
-\code{\link{schedule}()}
-}
-\concept{Case Assignment}

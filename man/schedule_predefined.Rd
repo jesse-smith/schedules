@@ -75,9 +75,3 @@ These functions depend on the more general
 an arbitrary weekly or rotating schedule and (if needed) an anchor point. See
 that function for implementing other schedules.
 }
-\seealso{
-Other Case Assignment: 
-\code{\link{schedule}()},
-\code{\link{std_names}()}
-}
-\concept{Case Assignment}

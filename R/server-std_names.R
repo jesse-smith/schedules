@@ -25,8 +25,6 @@
 #'
 #' @return The input `string` with cleaned names
 #'
-#' @family Case Assignment
-#'
 #' @export
 std_names <- function(string) {
   string %>%

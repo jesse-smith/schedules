@@ -1,3 +1,8 @@
+#' Rotating Schedule Module UI
+#'
+#' @param id The ID to assign to the module
+#'
+#' @noRd
 mod_rotating_sched_ui <- function(id) {
   shiny::sidebarLayout(
     sidebarPanel = mod_rotating_sched_input(id),
@@ -5,6 +10,14 @@ mod_rotating_sched_ui <- function(id) {
   )
 }
 
+#' Rotating Schedule Inputs
+#'
+#' UI inputs for the rotating schedule module. These are displayed in the
+#' sidebar.
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_rotating_sched_input <- function(id) {
   help_text <- paste(
     "This schedule repeats on a user-defined basis.",
@@ -24,10 +37,19 @@ mod_rotating_sched_input <- function(id) {
     anchor_date(id),
     rotations(id),
     shiny::br(),
-    download_button(id)
+    download_dropdown(id)
   )
 }
 
+
+#' Rotating Schedule Inputs
+#'
+#' UI output for the rotating schedule module. This is displayed in the
+#' main panel.
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_rotating_sched_output <- function(id) {
   shiny::mainPanel(
     shiny::plotOutput(
@@ -37,6 +59,13 @@ mod_rotating_sched_output <- function(id) {
   )
 }
 
+#' Rotating Schedule Module Server
+#'
+#' `moduleServer()` wrapper for rotating schedule module server
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_rotating_sched_server <- function(id) {
   shiny::moduleServer(
     id,
@@ -44,6 +73,13 @@ mod_rotating_sched_server <- function(id) {
   )
 }
 
+#' Server Function for Rotating Schedule Module
+#'
+#' Back-end for rotating schedule module
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_rotating_sched_server_function <- function(input, output, session) {
   # Create reactive cycle
   cycle <- shiny::reactive(
@@ -64,9 +100,15 @@ mod_rotating_sched_server_function <- function(input, output, session) {
     # Prevent premature invalidation
     shiny::debounce(1e3L)
 
-
-
-
   # Assign viz to output
   output$calendar <- shiny::renderPlot(calendar())
+
+  # Reactive title used in filename for download
+  title <- shiny::reactive(input$calendar_title) %>% shiny::debounce(1000L)
+
+  # React to download
+  output$png  <- download_handler("png", title())
+  output$pdf  <- download_handler("pdf", title())
+  output$html <- download_handler("html", title())
+  output$svg  <- download_handler("svg", title())
 }

@@ -1,3 +1,4 @@
+#' @rdname ui-utils
 date_range <- function(id) {
   shiny::dateRangeInput(
     shiny::NS(id, "date_range"),
@@ -7,6 +8,7 @@ date_range <- function(id) {
   )
 }
 
+#' @rdname ui-utils
 year_start <- function(date = lubridate::today()) {
 
   date <- lubridate::as_date(date)
@@ -16,6 +18,7 @@ year_start <- function(date = lubridate::today()) {
   lubridate::as_date(paste0(year, "-01-01"))
 }
 
+#' @rdname ui-utils
 year_end <- function(date = lubridate::today()) {
 
   date <- lubridate::as_date(date)

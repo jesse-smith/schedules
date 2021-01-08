@@ -17,6 +17,7 @@
 ## Add one line by package you want to add as dependency
 usethis::use_package("calendR")
 usethis::use_package("dplyr")
+usethis::use_package("ggplot2")
 usethis::use_package("janitor")
 usethis::use_package("magrittr")
 usethis::use_package("lubridate")

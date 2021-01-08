@@ -1,3 +1,4 @@
+#' @rdname ui-utils
 rotations <- function(id) {
   shiny::textInput(
     shiny::NS(id, "rotations"),

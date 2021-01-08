@@ -9,8 +9,6 @@
 #'
 #' @return A character vector of full day names
 #'
-#' @keywords internal
-#'
 #' @export
 parse_weekday <- function(day) {
 

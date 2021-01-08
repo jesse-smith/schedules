@@ -32,8 +32,6 @@
 #'   containing full weekday names), and `scheduled` (a `logical` column
 #'   defining whether a day is schedule ("on") or not ("off"))
 #'
-#' @family Case Assignment
-#'
 #' @aliases schedule_by_cycle schedule_by_day
 #'
 #' @export

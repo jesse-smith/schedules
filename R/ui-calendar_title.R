@@ -1,3 +1,4 @@
+#' @rdname ui-utils
 calendar_title <- function(id) {
   shiny::textInput(
     shiny::NS(id, "calendar_title"),

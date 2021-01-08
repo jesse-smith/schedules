@@ -1,3 +1,15 @@
+#' Convert Rotations Input to an Expanded Shift Cycle
+#'
+#' `rotations_to_cycle()` converts a string like `"4-2"` to a vector of `TRUE`
+#' and `FALSE` values to pass to
+#' \code{\link[schedules:schedule_by_cycle]{schedule_by_cycle()}}
+#'
+#' @param rotations Character. A string of alternating numbers and dashes
+#'   representing the "on" and "off" periods of a rotating schedule. This
+#'   must contain an even number of numerals and dashes between each numeral
+#'   (i.e. "4-2-3-3" is a valid input; "4-2-3" or "4 2 3" is not).
+#'
+#' @export
 rotations_to_cycle <- function(rotations) {
   rotations %>%
     std_rotations() %>%
@@ -7,6 +19,37 @@ rotations_to_cycle <- function(rotations) {
     expand_rotations()
 }
 
+#' \code{\link[schedules:rotations_to_cycle]{rotations_to_cycle}} Helpers
+#'
+#' @description
+#' These functions assist `rotations_to_cycle()`:
+#'
+#' \itemize{
+#'   \item{`std_rotations()` standardizes the `rotations` string}
+#'   \item{`split_rotations()` splits the string into a vector of numbers}
+#'   \item{`validate_rotations()` validates expectations for `rotations`}
+#'   \item{`expand_rotations()` expands the numeric vector to a logical one}
+#' }
+#'
+#' `std_rotations()` has helper functions of its own:
+#'
+#' \itemize{
+#'   \item{`remove_whitespace()` removes all whitespace from a string}
+#'   \item{`dash_to_space()` converts all dashes to spaces}
+#'   \item{`keep_numeric_space()` removes all non-numeric/space characters}
+#'   \item{`space_to_dash()` converts all spaces back to dashes}
+#' }
+#'
+#' @param rtns The `rotations` vector in various formats
+#'
+#' @param string A character string
+#'
+#' @name rotations_to_cycle-helpers
+NULL
+
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 expand_rotations <- function(rtns) {
 
   n <- vctrs::vec_size(rtns)
@@ -22,6 +65,9 @@ expand_rotations <- function(rtns) {
   unlist(scheduled_list)
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 validate_rotations <- function(rtns) {
   n <- vctrs::vec_size(rtns)
 
@@ -45,12 +91,18 @@ validate_rotations <- function(rtns) {
   rtns
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 split_rotations <- function(rtns) {
   rtns %>%
     stringr::str_split(pattern = "-") %>%
     unlist()
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 std_rotations <- function(rtns) {
   rtns %>%
     remove_whitespace() %>%
@@ -59,11 +111,16 @@ std_rotations <- function(rtns) {
     space_to_dash()
 }
 
-
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 remove_whitespace <- function(string) {
  stringr::str_remove_all(string, pattern = "[\t\n\r ]")
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 dash_to_space <- function(string) {
   stringr::str_replace_all(
     string,
@@ -72,10 +129,16 @@ dash_to_space <- function(string) {
   )
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 keep_numeric_space <- function(string) {
   stringr::str_remove_all(string, pattern = "[^0-9 ]")
 }
 
+#' @rdname rotations_to_cycle-helpers
+#'
+#' @export
 space_to_dash <- function(string) {
   string %>%
     stringr::str_squish() %>%

@@ -12,7 +12,7 @@
 #'
 #' @return A `Date` or `POSIXct` vector
 #'
-#' @noRd
+#' @export
 std_dates <- function(
   x,
   orders = c("dmy", "mdy", "ymd", "dmyT", "mdyT", "ymdT")

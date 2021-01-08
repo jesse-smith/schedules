@@ -7,9 +7,9 @@
 #' is designed to work inside Shiny modules.
 #'
 #' @inherit shinyWidgets::materialSwitch params return
-#' 
+#'
 #' @param id The id of the Shiny module calling this function
-#' 
+#'
 #' @param day A day of the week, as a 3-letter abbreviation in title case
 weekday_switch <- function(
   id,

@@ -65,9 +65,3 @@ beginning of a week.
 underlying `as_schedule()`. They handle the general cyclic and weekly use
 cases described above.
 }
-\seealso{
-Other Case Assignment: 
-\code{\link{schedule_predefined}()},
-\code{\link{std_names}()}
-}
-\concept{Case Assignment}

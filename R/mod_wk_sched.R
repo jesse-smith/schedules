@@ -1,8 +1,6 @@
-#' weekly UI Function
+#' Weekly Schedule Module UI
 #'
-#' @description A shiny Module.
-#'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @param id The ID to assign to the module
 #'
 #' @noRd
 mod_wk_sched_ui <- function(id){
@@ -13,6 +11,14 @@ mod_wk_sched_ui <- function(id){
   )
 }
 
+#' Weekly Schedule Inputs
+#'
+#' UI inputs for the weekly schedule module. These are displayed in the
+#' sidebar.
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_wk_sched_input <- function(id) {
 
   help_text <- paste(
@@ -35,10 +41,18 @@ mod_wk_sched_input <- function(id) {
     weekday_switch(id, "fri", value = TRUE),
     weekday_switch(id, "sat"),
     shiny::br(),
-    download_button(id)
+    download_dropdown(id)
   )
 }
 
+#' Weekly Schedule Inputs
+#'
+#' UI output for the weekly schedule module. This is displayed in the
+#' main panel.
+#'
+#' @inheritParams mod_rotating_sched_ui
+#'
+#' @noRd
 mod_wk_sched_output <- function(id) {
   shiny::mainPanel(
     shiny::plotOutput(
@@ -48,7 +62,11 @@ mod_wk_sched_output <- function(id) {
   )
 }
 
-#' weekly Server Function
+#' Weekly Schedule Module Server
+#'
+#' `moduleServer()` wrapper for weekly schedule module server
+#'
+#' @inheritParams mod_rotating_sched_ui
 #'
 #' @noRd
 mod_wk_sched_server <- function(id) {
@@ -56,7 +74,7 @@ mod_wk_sched_server <- function(id) {
 }
 
 mod_weekly_server_function <- function(input, output, session) {
-  
+
   # Create reactive weekly cycle
   cycle <- shiny::reactive(
     c(
@@ -69,7 +87,7 @@ mod_weekly_server_function <- function(input, output, session) {
       "sat" = input$sat
     )
   )
-  
+
   # Create reactive calendar viz
   calendar <- shiny::reactive(
     create_calendar(
@@ -82,7 +100,16 @@ mod_weekly_server_function <- function(input, output, session) {
   ) %>%
   # Prevent updating too frequently
   shiny::debounce(1000L)
-  
+
   # Assign viz to output
   output$calendar <- shiny::renderPlot(calendar())
+
+  # Reactive title used in filename for download
+  title <- shiny::reactive(input$calendar_title) %>% shiny::debounce(1000L)
+
+  # React to download
+  output$png  <- download_handler("png", title())
+  output$pdf  <- download_handler("pdf", title())
+  output$html <- download_handler("html", title())
+  output$svg  <- download_handler("svg", title())
 }

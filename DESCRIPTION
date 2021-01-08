@@ -17,6 +17,7 @@ Imports:
     config,
     dplyr,
     DT,
+    ggplot2,
     glue,
     golem,
     htmltools,
@@ -26,10 +27,11 @@ Imports:
     processx,
     rlang,
     shiny,
+    shinythemes,
     shinyWidgets,
     stringr,
     vctrs,
-    shinythemes
+    pkgload
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
